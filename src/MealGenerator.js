@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import YoutubeEmbed from './YoutubeEmbed';
+import YouTubeGetID from './YouTubeGetID';
 import './MealGenerator.css'
 
 class MealGenerator extends Component {
@@ -12,6 +13,7 @@ class MealGenerator extends Component {
         this.handleClick = this.handleClick.bind(this)
     }
 
+    
     handleClick() {
         fetch("https://www.themealdb.com/api/json/v1/1/random.php")
             .then((response) => response.json())
@@ -25,6 +27,14 @@ class MealGenerator extends Component {
 
     render() {
         const { meals } = this.state;
+        let strURL = meals.strYoutube;
+        let url;
+        if (typeof strURL === 'string') {
+            url = YouTubeGetID(strURL)
+        } else {
+            console.log('err')
+        }
+           
         return (
             <div> 
                 <button onClick={this.handleClick}>Get new meal</button>
@@ -33,7 +43,7 @@ class MealGenerator extends Component {
                 <img src={meals.strMealThumb} />
                 <br />
                 {this.state.isLoaded && <h2 className="recipe">Recipe: {meals.strInstructions}</h2> }
-                
+                {this.state.isLoaded && <YoutubeEmbed embedId={url} />}
             </div>
         )
     }
