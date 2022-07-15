@@ -7,7 +7,6 @@ function App() {
     <div className="App">
       <h1>Random Meal Generator</h1>
       <MealGenerator />
-
     </div>
   );
 }
