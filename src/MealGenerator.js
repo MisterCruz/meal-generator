@@ -33,6 +33,7 @@ class MealGenerator extends Component {
                 <img src={meals.strMealThumb} />
                 <br />
                 {this.state.isLoaded && <h2 className="recipe">Recipe: {meals.strInstructions}</h2> }
+                
             </div>
         )
     }
